@@ -7,16 +7,16 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 
-	bool master = true;
-	if (argv[1] == "slave-")
-		master = false;
+	int master = 1;
+	if (!strcmp(argv[1], "slave-"))
+		master = 0;
 
 	int heartbeatPort = atoi(argv[2]);
 	int peerPort = atoi(argv[3]);
 	int clientPort = atoi(argv[4]);
 
-	if(argc == 6)
-		char** upstream = argv[5];
+	if (argc == 6)
+		char *upstream = strdup(argv[5]);
 
 	return 0;
 }
