@@ -1,4 +1,5 @@
 #include "aixen.h"
+#include "axn_server.h"
 
 int main (int argc, char **argv) {
 	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
@@ -7,16 +8,7 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 
-	int master = 1;
-	if (!strcmp(argv[1], "slave-"))
-		master = 0;
-
-	int heartbeatPort = atoi(argv[2]);
-	int peerPort = atoi(argv[3]);
-	int clientPort = atoi(argv[4]);
-
-	if (argc == 6)
-		char *upstream = strdup(argv[5]);
+	//Go to serve
 
 	return 0;
 }
