@@ -1,11 +1,22 @@
 #include "aixen.h"
 
 int main (int argc, char **argv) {
-	// a.out [master/slave] [heartbeat port] [peer port] [client port] {upstream URL}
+	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
 	if ((argc != 5) && (argc !=6)) {
 		error_invocation (argc, argv);
 		return -1;
 	}
+
+	bool master = true;
+	if (argv[1] == "slave-")
+		master = false;
+
+	int heartbeatPort = atoi(argv[2]);
+	int peerPort = atoi(argv[3]);
+	int clientPort = atoi(argv[4]);
+
+	if(argc == 6)
+		char** upstream = argv[5];
 
 	return 0;
 }
