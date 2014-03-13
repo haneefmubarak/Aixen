@@ -1,4 +1,4 @@
 #include <stdio.h>
 #include "bool.h"
 
-void		serve	(int argc, char** argv);
+int		serve	(int argc, char** argv);

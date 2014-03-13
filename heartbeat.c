@@ -45,7 +45,7 @@ int heartbeat(int port) {
             clientSocket = accept( serverSocket,
                                     (struct sockaddr *)&clientData,
                                     &clientDataLength );
-            assert( clientSocket > 0 ); // ensure we have a valid socket
+            //assert( clientSocket > 0 ); // ensure we have a valid socket
 
             char *clientAddress = inet_ntoa( clientData.sin_addr );
             int clientPort = ntohs( clientData.sin_port );
@@ -83,7 +83,7 @@ int heartbeat(int port) {
                 // close the connection to the client before exit
                 close( clientSocket );
 
-                exit( EXIT_SUCCESS );
+                exit( 0 );
             } else {
                 // we are in the parent process
 

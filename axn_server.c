@@ -21,9 +21,9 @@ int serve (int argc, char **argv) {
 	int heartbeatPort = atoi(argv[2]);
 	int peerPort = atoi(argv[3]);
 	int clientPort = atoi(argv[4]);
-
-	if (argc == 6)
-		char* upstream = strdup(argv[5]);
+	char* upstream = "";
+	if (argc == 6){
+		upstream = strdup(argv[5]);}
 
     //std::thread hb (heartbeat,heartbeatPort);
     int itemp = pthread_create(&threads[0], NULL, heartbeat, (void *)heartbeatPort);
@@ -66,7 +66,7 @@ int serve (int argc, char **argv) {
             clientSocket = accept( serverSocket,
                                     (struct sockaddr *)&clientData,
                                     &clientDataLength );
-            assert( clientSocket > 0 ); // ensure we have a valid socket
+            //assert( clientSocket > 0 ); // ensure we have a valid socket
 
             char *clientAddress = inet_ntoa( clientData.sin_addr );
             int clientPort = ntohs( clientData.sin_port );
@@ -122,7 +122,7 @@ int serve (int argc, char **argv) {
                 // close the connection to the client before exit
                 close( clientSocket );
 
-                exit( EXIT_SUCCESS );
+                exit( 0 );
             } else {
                 // we are in the parent process
 
