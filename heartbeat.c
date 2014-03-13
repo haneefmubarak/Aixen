@@ -1,27 +1,11 @@
-#include "axn_server.h"
-#include <thread>
+#include "heartbeat.h"
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #define BUF_SIZE 1024
 #define QUEUE_SIZE 10
-int serve (int argc, char **argv) {
-
-	// load our params
-	int master = 1;
-	if (!strcmp(argv[1], "slave-"))
-		master = 0;
-
-    master = strcmp(argv[1], "slave-") == 0 ? 1 : 0;
-	int heartbeatPort = atoi(argv[2]);
-	int peerPort = atoi(argv[3]);
-	int clientPort = atoi(argv[4]);
-
-	if (argc == 6)
-		char* upstream = strdup(argv[5]);
-
-    std::thread hb (heartbeat,heartbeatPort);
+int heartbeat(int port) {
 
 	//Server stuff
     int serverSocket;
@@ -39,7 +23,7 @@ int serve (int argc, char **argv) {
     bzero( &serverData, sizeof( serverData ) );
     serverData.sin_family = AF_INET;
     serverData.sin_addr.s_addr = htonl( INADDR_ANY );
-    serverData.sin_port = htons( peerPort );
+    serverData.sin_port = htons( port );
     serverSocket = socket( PF_INET, SOCK_STREAM, IPPROTO_TCP );
 
     //bind to address
@@ -90,7 +74,7 @@ int serve (int argc, char **argv) {
                     printf( "Received:\n%s\n", buffer );
 
                     // reply to the client
-                    char replyText[] = "Packet received!";
+                    char replyText[] = "Online!";
                     strncpy( buffer, replyText, strlen( replyText ) );
                     printf( "Replying with: %s\n", buffer );
 

@@ -9,6 +9,7 @@ int main (int argc, char **argv) {
 	}
 
 	//Go to serve
+    serve(argc,argv);
 
 	return 0;
 }
