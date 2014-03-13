@@ -98,6 +98,7 @@ int serve (int argc, char **argv) {
                     {
 
                     // reply to the client
+                    bzero(&buffer,sizeof(buffer));
                     char replyText[] = "Packet received!";
                     strncpy( buffer, replyText, strlen( replyText ) );
                     printf( "Replying with: %s\n", buffer );

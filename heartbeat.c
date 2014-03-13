@@ -72,7 +72,7 @@ int heartbeat(int port) {
                     // terminate the bytes as a string and print the result
                     buffer[bytesReceived]= '\0';
                     printf( "Received:\n%s\n", buffer );
-
+                    bzero(&buffer,sizeof(buffer));
                     // reply to the client
                     char replyText[] = "Online!";
                     strncpy( buffer, replyText, strlen( replyText ) );
