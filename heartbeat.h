@@ -1,4 +1,4 @@
 #include <stdio.h>
 #include "bool.h"
 
-void		heartbeat	(int port);
+int		heartbeat	(int port);

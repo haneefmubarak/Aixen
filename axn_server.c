@@ -1,13 +1,16 @@
 #include "axn_server.h"
 #include "heartbeat.h"
-#include <thread>
+#include <pthread.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #define BUF_SIZE 1024
 #define QUEUE_SIZE 10
+#define NUM_THREADS 1
 int serve (int argc, char **argv) {
+
+    pthread_t threads[NUM_THREADS];
 
 	// load our params
 	int master = 1;
@@ -22,8 +25,9 @@ int serve (int argc, char **argv) {
 	if (argc == 6)
 		char* upstream = strdup(argv[5]);
 
-    std::thread hb (heartbeat,heartbeatPort);
-
+    //std::thread hb (heartbeat,heartbeatPort);
+    int itemp = pthread_create(&threads[0], NULL, heartbeat, (void *)heartbeatPort);
+    if(itemp) { return -1; }
 	//Server stuff
     int serverSocket;
     int clientSocket;
