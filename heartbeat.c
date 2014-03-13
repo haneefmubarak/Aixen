@@ -14,8 +14,8 @@ int heartbeat(int port) {
     struct sockaddr_in clientData;
     int clientDataLength;
     char buffer[BUF_SIZE];
-    bool isServing;
-    bool isConnectedToClient;
+    int isServing;
+    int isConnectedToClient;
     int bytesReceived;
     int pid;
 
@@ -39,7 +39,7 @@ int heartbeat(int port) {
         //here get the client socket and fork itself
         clientDataLength = sizeof( clientData );
 
-        isServing = true;
+        isServing = 1;
         while ( isServing ) {
             // accept an incoming connection request
             clientSocket = accept( serverSocket,
@@ -64,7 +64,7 @@ int heartbeat(int port) {
                 // (it's being used by the parent process)
                 close( serverSocket );
 
-                isConnectedToClient = true;
+                isConnectedToClient = 1;
                 while ( isConnectedToClient ) {
                     // receive any data from the client
                     bytesReceived = recv( clientSocket, buffer, BUF_SIZE, 0 );

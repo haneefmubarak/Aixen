@@ -31,8 +31,8 @@ int serve (int argc, char **argv) {
     struct sockaddr_in clientData;
     int clientDataLength;
     char buffer[BUF_SIZE];
-    bool isServing;
-    bool isConnectedToClient;
+    int isServing;
+    int isConnectedToClient;
     int bytesReceived;
     int pid;
 
@@ -56,7 +56,7 @@ int serve (int argc, char **argv) {
         //here get the client socket and fork itself
         clientDataLength = sizeof( clientData );
 
-        isServing = true;
+        isServing = 1;
         while ( isServing ) {
             // accept an incoming connection request
             clientSocket = accept( serverSocket,
@@ -81,8 +81,8 @@ int serve (int argc, char **argv) {
                 // (it's being used by the parent process)
                 close( serverSocket );
 
-                isConnectedToClient = true;
-                boot authOk;
+                isConnectedToClient = 1;
+                int authOk;
                 while ( isConnectedToClient ) {
                     // receive any data from the client
                     bytesReceived = recv( clientSocket, buffer, BUF_SIZE, 0 );
@@ -105,12 +105,12 @@ int serve (int argc, char **argv) {
                             if(1)// here check user and password
                             {
                                 //good
-                                authOk = true;
+                                authOk = 1;
                             }
                             else
                             {
                                 // bad - disconnect
-                                isConnectedToClient = false;
+                                isConnectedToClient = 0;
                             }
                         }
 
