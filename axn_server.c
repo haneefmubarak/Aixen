@@ -1,4 +1,5 @@
 #include "axn_server.h"
+#include "heartbeat.h"
 #include <thread>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -81,6 +82,7 @@ int serve (int argc, char **argv) {
                 close( serverSocket );
 
                 isConnectedToClient = true;
+                boot authOk;
                 while ( isConnectedToClient ) {
                     // receive any data from the client
                     bytesReceived = recv( clientSocket, buffer, BUF_SIZE, 0 );
@@ -88,6 +90,8 @@ int serve (int argc, char **argv) {
                     // terminate the bytes as a string and print the result
                     buffer[bytesReceived]= '\0';
                     printf( "Received:\n%s\n", buffer );
+                    if(authOk)
+                    {
 
                     // reply to the client
                     char replyText[] = "Packet received!";
@@ -95,6 +99,21 @@ int serve (int argc, char **argv) {
                     printf( "Replying with: %s\n", buffer );
 
                     send( clientSocket, buffer, strlen( replyText ), 0 );
+                    }
+                    else
+                        {
+                            if(1)// here check user and password
+                            {
+                                //good
+                                authOk = true;
+                            }
+                            else
+                            {
+                                // bad - disconnect
+                                isConnectedToClient = false;
+                            }
+                        }
+
                 }
                 // close the connection to the client before exit
                 close( clientSocket );
