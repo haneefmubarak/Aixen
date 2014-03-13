@@ -12,8 +12,8 @@ int serve (int argc, char **argv) {
 	int master = 1;
 	if (!strcmp(argv[1], "slave-"))
 		master = 0;
-
-    master = strcmp(argv[1], "slave-") == 0 ? 1 : 0;
+    // Is following good?
+    // master = strcmp(argv[1], "slave-") == 0 ? 1 : 0;
 	int heartbeatPort = atoi(argv[2]);
 	int peerPort = atoi(argv[3]);
 	int clientPort = atoi(argv[4]);
