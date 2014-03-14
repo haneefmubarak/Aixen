@@ -18,5 +18,4 @@
 *.app
 
 # Build Directory
-./build
-./build/*
+build/*
