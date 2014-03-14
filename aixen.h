@@ -13,6 +13,7 @@ typedef struct {
 } ports;
 
 extern ports port;
+extern int connected;
 
 // heartbeat
 extern void	(*func_heartbeat)(void *nothing);	// pthreads

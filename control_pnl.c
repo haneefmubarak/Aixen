@@ -12,14 +12,16 @@ void control()
 {
     while (1)
     {
+        printf("\033[2J"); // Clear terminal
         redraw();
         char s[100];
         fgets(s,sizeof(s),stdin);
+        s = strchr(s, '\n');
         printf("\033[1,0H");
-        if(!strcmp(s,"status")) // TODO: Compare non-casesensitive and better command handling. I will do it.
+        if(!strcmpi(s,"status")) // TODO: Better command handling. I will do it.
         {
             printf("running...");
-            printf("connected: " + itoa(connected));
+            printf("connected: %d",connected);
         }
         else
         {
@@ -31,9 +33,9 @@ void control()
 
 void redraw()
 {
-    printf("\033[0;0H\033[0;37;44mHeartbeat:     Peer listen:     Main Server:     Connected: " + itoa(connected));
+    printf("\033[0;0H\033[0;37;44mHeartbeat:     Peer listen:     Main Server:     Connected: %d",connected);
     printf("\033[0;11H\033[0;37;42mOK ");
     printf("\033[0;28H\033[0;37;42mOK ");
     printf("\033[0;45H\033[0;37;42mOK ");
-    printf("\033[23;0H\033[0;37;40maixen>");
+    printf("\033[37;0H\033[0;37;40maixen>");
 }
