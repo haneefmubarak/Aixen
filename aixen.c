@@ -7,18 +7,15 @@ int connected = 0;
 int main (int argc, char **argv) {
 	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
 	if ((argc != 5) && (argc !=6)) {
-		error_invocation (argc, argv);
-		return -1;
+		return error_invocation (argc, argv);
 	}
 
 	if (!strcmp (argv[1], "master"))
 		master = 1;
 	else if (!strcmp (argv[1], "slave-"))
 		master = 0;
-	else {
-		error_invocation (argc, argv);
-		return -1;
-	}
+	else
+		return error_invocation (argc, argv);
 
 	port.heartbeat	= atoi (argv[2]);
 	port.peer	= atoi (argv[3]);
@@ -45,7 +42,7 @@ int main (int argc, char **argv) {
 	return 0;
 }
 
-void error_invocation (int argc, char **argv) {
+int error_invocation (int argc, char **argv) {
 	fprintf (stderr,
 		"Invocation requires five or six arguments:\n"
 		"%s "
@@ -71,5 +68,7 @@ void error_invocation (int argc, char **argv) {
 		argv[0], argv[0], argv[0], argv[0]
 		);
 
-	return;
+
+	// and thus close the program
+	return -1;
 }

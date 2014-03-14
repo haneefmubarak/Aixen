@@ -20,6 +20,6 @@ extern void	(*func_heartbeat)(void *nothing);	// pthreads
 
 
 
-void		error_invocation	(int argc, char** argv);
+int		error_invocation	(int argc, char** argv);
 void        redraw              ();
 void        control             ();
