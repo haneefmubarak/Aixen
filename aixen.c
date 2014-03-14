@@ -1,5 +1,8 @@
 #include "aixen.h"
 
+ports port;
+int master = 1;
+
 int main (int argc, char **argv) {
 	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
 	if ((argc != 5) && (argc !=6)) {
@@ -7,13 +10,12 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 
-	int master = 1;
 	if (!strcmp(argv[1], "slave-"))
 		master = 0;
 
-	int heartbeatPort = atoi(argv[2]);
-	int peerPort = atoi(argv[3]);
-	int clientPort = atoi(argv[4]);
+	port.heartbeat	= atoi(argv[2]);
+	port.peer	= atoi(argv[3]);
+	port.client	= atoi(argv[4]);
 
 	char *upstream = NULL;
 	if (argc == 6)
