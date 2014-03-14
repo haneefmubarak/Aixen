@@ -30,7 +30,7 @@ MOFLAGS += -ftree-loop-distribute-patterns -funswitch-loops
 MOFLAGS += -ftree-vectorize
 
 CFLAGS = -pthread
-debug:		CFLAGS += -Og -g
+debug:		CFLAGS += -Os -g
 native:		CFLAGS += $(MOFLAGS) -march=native
 release:	CFLAGS += $(MOFLAGS) -mtune=generic
 
@@ -66,7 +66,7 @@ build/files_c:		build build/aixen.o
 	touch build/files_c
 
 build/aixen.o:		build aixen.c build/aixen.h.gch
-	$(CC) aixen.c -o build/aixen.o
+	$(CC) aixen.c -c -o build/aixen.o
 
 build/aixen.h.gch:	build aixen.h
 	$(HC) aixen.h -o build/aixen.h

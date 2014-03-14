@@ -15,8 +15,9 @@ int main (int argc, char **argv) {
 	int peerPort = atoi(argv[3]);
 	int clientPort = atoi(argv[4]);
 
+	char *upstream = NULL;
 	if (argc == 6)
-		char *upstream = strdup(argv[5]);
+		upstream = strdup(argv[5]);
 
 	return 0;
 }
