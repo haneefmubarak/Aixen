@@ -16,9 +16,9 @@ void control()
         redraw();
         char s[100];
         fgets(s,sizeof(s),stdin);
-        s = strchr(s, '\n');
+        *s = strchr(*s, '\n');
         printf("\033[1,0H");
-        if(!strcmpi(s,"status")) // TODO: Better command handling. I will do it.
+        if(!strcmp(s,"status")) // TODO: Better command handling. I will do it.
         {
             printf("running...");
             printf("connected: %d",connected);
