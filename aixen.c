@@ -30,6 +30,8 @@ int main (int argc, char **argv) {
 			NULL			// data pointer
 			));
 
+  redraw();
+
 	return 0;
 }
 
