@@ -16,9 +16,12 @@ void control()
         redraw();
         char s[100];
         fgets(s,sizeof(s),stdin);
-        *s = strchr(*s, '\n');
-        printf("\033[1,0H");
-        if(!strcmp(s,"status")) // TODO: Better command handling. I will do it.
+        int len = strlen(s);
+        s[len-1] = "\0";
+        printf("\033[2J");
+        redraw();
+        printf("\033[1;0H");
+        if(!strcmp(s,"status")) // TODO: Better command handling.
         {
             printf("running...");
             printf("connected: %d",connected);
@@ -27,6 +30,7 @@ void control()
         {
             printf("command not found!");
         }
+        sleep(1);
     }
 
 }
