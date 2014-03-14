@@ -2,6 +2,7 @@
 
 ports port;
 int master = 1;
+int connected = 0;
 
 int main (int argc, char **argv) {
 	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
@@ -30,7 +31,10 @@ int main (int argc, char **argv) {
 			NULL			// data pointer
 			));
 
-  redraw();
+    if(master)
+    {
+        control();
+    }
 
 	return 0;
 }

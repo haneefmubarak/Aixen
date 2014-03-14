@@ -62,11 +62,14 @@ clean:
 build/aixen:		build build/files_c
 	$(LC) build/*.o -o build/aixen
 
-build/files_c:		build build/aixen.o build/heartbeat.o
+build/files_c:		build build/aixen.o build/heartbeat.o build/control_pnl.o
 	touch build/files_c
 
 build/aixen.o:		build build/aixen.h.gch aixen.c
 	$(CC) aixen.c -c -o build/aixen.o
+
+build/control_pnl.o:	build build/aixen.o build/aixen.h.gch control_pnl.c
+	$(CC) control_pnl.c -c -o build/control_pnl.o
 
 build/heartbeat.o:	build build/aixen.h.gch heartbeat.c
 	$(CC) heartbeat.c -c -o build/heartbeat.o
