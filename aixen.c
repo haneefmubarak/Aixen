@@ -21,6 +21,15 @@ int main (int argc, char **argv) {
 	if (argc == 6)
 		upstream = strdup(argv[5]);
 
+
+	pthread_t thread_heartbeat;
+	assert (!pthread_create (		// pthreads returns zero on success
+			&thread_heartbeat,	// thread struct pointer
+			NULL,			// thread attr
+			func_heartbeat,		// function
+			NULL			// data pointer
+			));
+
 	return 0;
 }
 

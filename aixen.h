@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <assert.h>
+
 #include <pthread.h>
 
 typedef struct {
@@ -12,9 +14,9 @@ typedef struct {
 
 extern ports port;
 
+// heartbeat
+extern void	(*func_heartbeat)(void *nothing);	// pthreads
+
 
 
 void		error_invocation	(int argc, char** argv);
-
-// heartbeat
-void		(*heartbeat)		(void *nothing);	// pthreads
