@@ -1,7 +1,7 @@
 #include "aixen.h"
 
 ports port;
-int master = 1;
+int master;
 int connected = 0;
 
 int main (int argc, char **argv) {
@@ -11,8 +11,14 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 
-	if (!strcmp (argv[1], "slave-"))
+	if (!strcmp (argv[1], "master"))
+		master = 1;
+	else if (!strcmp (argv[1], "slave-"))
 		master = 0;
+	else {
+		error_invocation (argc, argv);
+		return -1;
+	}
 
 	port.heartbeat	= atoi (argv[2]);
 	port.peer	= atoi (argv[3]);
