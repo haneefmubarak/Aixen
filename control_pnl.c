@@ -13,8 +13,8 @@
 
 void redraw()
 {
-    cout << "\033[0;0H\033[0;37;44mHeartbeat:     Peer listen:     Main Server:    ";
-    cout << "\033[11;0H\033[0;37;42mOK ";
-    cout << "\033[28;0H\033[0;37;42mOK ";
-    cout << "\033[45;0H\033[0;37;42mOK ";
+    printf("\033[0;0H\033[0;37;44mHeartbeat:     Peer listen:     Main Server:    ");
+    printf("\033[0;11H\033[0;37;42mOK ");
+    printf("\033[0;28H\033[0;37;42mOK ");
+    printf("\033[0;45H\033[0;37;42mOK ");
 }
