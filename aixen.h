@@ -18,8 +18,9 @@ extern int connected;
 // heartbeat
 extern void	(*func_heartbeat)(void *nothing);	// pthreads
 
+// control panel
+void		redraw			();
+void		control			();
 
 
 int		error_invocation	(int argc, char** argv);
-void        redraw              ();
-void        control             ();

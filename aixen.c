@@ -34,10 +34,9 @@ int main (int argc, char **argv) {
 			NULL			// data pointer
 			));
 
-    if(master)
-    {
-        control();
-    }
+	if (master) {
+		control();
+	}
 
 	return 0;
 }
