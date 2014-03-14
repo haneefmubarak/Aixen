@@ -11,16 +11,16 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 
-	if (!strcmp(argv[1], "slave-"))
+	if (!strcmp (argv[1], "slave-"))
 		master = 0;
 
-	port.heartbeat	= atoi(argv[2]);
-	port.peer	= atoi(argv[3]);
-	port.client	= atoi(argv[4]);
+	port.heartbeat	= atoi (argv[2]);
+	port.peer	= atoi (argv[3]);
+	port.client	= atoi (argv[4]);
 
 	char *upstream = NULL;
 	if (argc == 6)
-		upstream = strdup(argv[5]);
+		upstream = strdup (argv[5]);
 
 
 	pthread_t thread_heartbeat;
