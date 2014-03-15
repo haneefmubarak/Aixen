@@ -30,9 +30,9 @@ MOFLAGS += -ftree-loop-distribute-patterns -funswitch-loops
 MOFLAGS += -ftree-vectorize
 
 CFLAGS = -pthread
-debug:		CFLAGS += -Os -g
-native:		CFLAGS += $(MOFLAGS) -march=native
-release:	CFLAGS += $(MOFLAGS) -mtune=generic
+debug:		CFLAGS += -Os -g -W
+native:		CFLAGS += $(MOFLAGS) -w -march=native
+release:	CFLAGS += $(MOFLAGS) -w -mtune=generic
 
 HFLAGS = -Ibuild -I.
 LFLAGS = -levent
@@ -44,8 +44,13 @@ LC = $(CC) $(LFLAGS)
 
 # Final Targets
 debug:		build/aixen
+	date >> debug
+
 native:		build/aixen
+	date >> native
+
 release:	build/aixen
+	date >> release
 
 # Generics
 .PHONY:	all
@@ -56,7 +61,7 @@ build:
 
 .PHONY: clean
 clean:
-	rm -rvf build
+	rm -rvf build debug native release
 
 # Aixen
 build/aixen:		build build/files_c
@@ -75,4 +80,4 @@ build/heartbeat.o:	build build/aixen.h.gch heartbeat.c
 	$(CC) heartbeat.c -c -o build/heartbeat.o
 
 build/aixen.h.gch:	build aixen.h
-	$(HC) aixen.h -o build/aixen.h
+	$(HC) aixen.h -o build/aixen.h.gch
