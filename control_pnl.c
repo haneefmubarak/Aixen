@@ -44,20 +44,20 @@ int doCommand(char* comm) // Work In Progress
 
     }
 }
-
-void writeline(char line[])
+//Please help from this line down - i think the problem is in draw().
+void writeline(char* line)
 {
     if(row = 36)
     {
         int tmp = 0;
         while (tmp != 36)
         {
-            screen[tmp] = screen[tmp+1];
+            strcpy(screen[tmp],screen[tmp+1]);
             tmp++;
         }
         row = 0;
     }
-    screen[row] = line;
+    strcpy(screen[row],line);
     row++;
 }
 
@@ -67,11 +67,7 @@ void draw()
     int y = 2;
     while (y != 38)
     {
-        while (x != 81)
-        {
-            printf("\003[%d;%dH%c",y,x,screen[y][x]);
-            x++;
-        }
+        printf("\003[%d;%dH%c",y,x,screen[y]);
         y++;
     }
 }
