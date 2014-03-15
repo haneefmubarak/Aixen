@@ -6,27 +6,36 @@
 
 #include <pthread.h>
 
-typedef struct {
+struct aixen_ports {
 	int heartbeat;
 	int peer;
 	int client;
-	int master;
-	int connected;
-	int heartbeatStatus;
-	int mainStatus;
-	int peerStatus;
-	char* upstream;
-} config;
+};
 
-extern config cfg;
+struct aixen_status {
+	int heartbeat;
+	int main;
+	int peer;
+};
+
+struct aixen_configuration {
+	struct aixen_ports	port;
+	struct aixen_status	status;
+	int			master;
+	int			connected;
+	char* upstream;
+};
+
+extern	struct aixen_configuration		config;
 
 // heartbeat
 extern void	(*func_heartbeat)(void *nothing);	// pthreads
 
 // control panel
 void		redraw			(void);
+void		draw			(void);
 void		control			(void);
-void		doCommand		(char* comm);
+int		doCommand		(char* comm);
 void		writeline		(char* line);	// Use this to log messages to CPL
 
 
