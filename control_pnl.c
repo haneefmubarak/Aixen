@@ -19,6 +19,7 @@ void control()
         {
             printf("command not found!");
         }
+        printf("\033[37;6H");
         sleep(1);
     }
 
