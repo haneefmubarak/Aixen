@@ -35,7 +35,7 @@ native:		CFLAGS += $(MOFLAGS) -march=native
 release:	CFLAGS += $(MOFLAGS) -mtune=generic
 
 HFLAGS = -Ibuild -I.
-LFLAGS = -lev
+LFLAGS = -levent
 
 HC = $(SC) $(HFLAGS)
 CC = $(HC) $(CFLAGS)
