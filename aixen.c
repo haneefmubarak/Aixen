@@ -8,7 +8,7 @@ int main (int argc, char **argv) {
 		return error_invocation (argc, argv);
 	}
 
-    cfg.connected = 0;
+	cfg.connected = 0;
 
 	if (!strcmp (argv[1], "master"))
 		cfg.master = 1;
@@ -23,8 +23,8 @@ int main (int argc, char **argv) {
 
 	if (argc == 6)
 		cfg.upstream = strdup (argv[5]);
-    else
-        cfg.upstream = NULL;
+	else
+		cfg.upstream = NULL;
 
 
 	pthread_t thread_heartbeat;
@@ -34,9 +34,10 @@ int main (int argc, char **argv) {
 			func_heartbeat,		// function
 			NULL			// data pointer
 			));
-    cfg.heartbeatStatus = 1;
-    cfg.mainStatus = 1;
-    cfg.peerStatus = 1;
+
+	cfg.heartbeatStatus = 1;
+	cfg.mainStatus = 1;
+	cfg.peerStatus = 1;
 
 	if (cfg.master) {
 		control();

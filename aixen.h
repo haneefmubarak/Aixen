@@ -24,10 +24,10 @@ extern config cfg;
 extern void	(*func_heartbeat)(void *nothing);	// pthreads
 
 // control panel
-void		redraw		    	();
-void		control			    ();
-void		doCommand (char* comm);
-void        writeline (char* line); // Use this to log messages to CPL
+void		redraw			(void);
+void		control			(void);
+void		doCommand		(char* comm);
+void		writeline		(char* line);	// Use this to log messages to CPL
 
 
 int		error_invocation	(int argc, char** argv);
