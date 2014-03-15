@@ -1,8 +1,6 @@
 #include "aixen.h"
 
-ports port;
-int master;
-int connected = 0;
+config cfg;
 
 int main (int argc, char **argv) {
 	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
@@ -10,20 +8,23 @@ int main (int argc, char **argv) {
 		return error_invocation (argc, argv);
 	}
 
+    cfg.connected = 0;
+
 	if (!strcmp (argv[1], "master"))
-		master = 1;
+		cfg.master = 1;
 	else if (!strcmp (argv[1], "slave-"))
-		master = 0;
+		cfg.master = 0;
 	else
 		return error_invocation (argc, argv);
 
-	port.heartbeat	= atoi (argv[2]);
-	port.peer	= atoi (argv[3]);
-	port.client	= atoi (argv[4]);
+	cfg.heartbeat	= atoi (argv[2]);
+	cfg.peer	= atoi (argv[3]);
+	cfg.client	= atoi (argv[4]);
 
-	char *upstream = NULL;
 	if (argc == 6)
-		upstream = strdup (argv[5]);
+		cfg.upstream = strdup (argv[5]);
+    else
+        cfg.upstream = NULL;
 
 
 	pthread_t thread_heartbeat;
@@ -33,8 +34,11 @@ int main (int argc, char **argv) {
 			func_heartbeat,		// function
 			NULL			// data pointer
 			));
+    cfg.heartbeatStatus = 1;
+    cfg.mainStatus = 1;
+    cfg.peerStatus = 1;
 
-	if (master) {
+	if (cfg.master) {
 		control();
 	}
 
