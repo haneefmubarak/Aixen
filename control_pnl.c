@@ -55,7 +55,7 @@ void writeline(char* line)
             strcpy(screen[tmp],screen[tmp+1]);
             tmp++;
         }
-        row = 0;
+        row = 35;
     }
     strcpy(screen[row],line);
     row++;
