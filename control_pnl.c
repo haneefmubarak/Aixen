@@ -4,6 +4,10 @@ int row = 0;
 char screen[80][36];
 void control()
 {
+    printf("\033[0;37;40m\033[2J");
+    draw();
+    redraw();
+    printf("\033[37;7H");
     while (1)
     {
 
@@ -11,17 +15,10 @@ void control()
         fgets(s,sizeof(s),stdin);
         int len = strlen(s);
         s[len-1] = 0;
-        printf("\033[2J"); // Clear terminal
-        redraw();
+        printf("\033[0;37;40m\033[2J"); // Clear terminal
+        doCommand(s);
         draw();
-        if(!strcasecmp(s,"status")) // TODO: Better command handling.
-        {
-            writeline("running...");
-        }
-        else
-        {
-            writeline("command not found!");
-        }
+        redraw();
         printf("\033[37;7H");
     }
 
@@ -33,18 +30,31 @@ void redraw(void)
     printf("\033[0;12H\033[0;37;4%s%s%s",(config.status.heartbeat == 0 ? "1" : "2"),"m",(config.status.heartbeat == 0 ? "OFF" : "OK "));
     printf("\033[0;29H\033[0;37;4%s%s%s",(config.status.peer == 0 ? "1" : "2"),"m",(config.status.peer == 0 ? "OFF" : "OK "));
     printf("\033[0;46H\033[0;37;4%s%s%s",(config.status.main == 0 ? "1" : "2"), "m",(config.status.main == 0 ? "OFF" : "OK "));
-    printf("\033[37;0H\033[0;30;47maixen>\033[0;37;40m");
+    printf("\033[37;0H\033[0;30;47maixen>\033[0;30;47m");
     printf("\033[2;0H");
 }
 
-int doCommand(char* comm) // Work In Progress
+int doCommand(char* comm) // Here add commands if you want
 {
-    if(!strcasecmp(comm,"status"))
+    if(!strcasecmp(comm,"refresh"))
     {
-
+    }
+    if(!strcasecmp(comm,"heartbeat"))
+    {
+        config.status.heartbeat = config.status.heartbeat == 0 ? 1 : 0;
+        writeline("Switched state of heartbeat.");
+    }
+    if(!strcasecmp(comm,"main"))
+    {
+        config.status.main = config.status.main == 0 ? 1 : 0;
+        writeline("Switched state of main.");
+    }
+    if(!strcasecmp(comm,"peer"))
+    {
+        config.status.peer = config.status.peer == 0 ? 1 : 0;
+        writeline("Switched state of peer.");
     }
 }
-//Please help from this line down - i think the problem is in draw().
 void writeline(char* line)
 {
     if(row = 36)
@@ -57,8 +67,9 @@ void writeline(char* line)
         }
         row = 35;
     }
-    strcpy(screen[row],line);
+    strcpy(screen[row + 1],line);
     row++;
+    draw();
 }
 
 void draw(void)
@@ -67,7 +78,7 @@ void draw(void)
     int y = 2;
     while (y != 38)
     {
-        printf("\003[%d;%dH%s",y,x,screen[y]);
+        printf("\033[%d;%dH%s",y,x,screen[y]);
         y++;
     }
 }
