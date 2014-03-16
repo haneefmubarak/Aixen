@@ -67,7 +67,7 @@ void draw(void)
     int y = 2;
     while (y != 38)
     {
-        printf("\003[%d;%dH%c",y,x,screen[y]);
+        printf("\003[%d;%dH%s",y,x,screen[y]);
         y++;
     }
 }
