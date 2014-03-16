@@ -38,7 +38,7 @@ void redraw(void)
     printf("\033[0;12H\033[0;37;4%s%s%s",(config.status.heartbeat == 0 ? "1" : "2"),"m",(config.status.heartbeat == 0 ? "OFF" : "OK "));
     printf("\033[0;29H\033[0;37;4%s%s%s",(config.status.peer == 0 ? "1" : "2"),"m",(config.status.peer == 0 ? "OFF" : "OK "));
     printf("\033[0;46H\033[0;37;4%s%s%s",(config.status.main == 0 ? "1" : "2"), "m",(config.status.main == 0 ? "OFF" : "OK "));
-    printf("\033[37;0H\033[0;30;47maixen>\033[0;30;47m");
+    printf("\033[37;0H\033[0;30;47maixen>\033[0;37;40m");
     printf("\033[2;0H");
 }
 
