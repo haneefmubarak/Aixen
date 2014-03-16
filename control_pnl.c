@@ -1,3 +1,11 @@
+//printf commands im using:
+// \033[2J - Clear Terminal
+// \033[0;FG;BGm - Change color FG = foreground colo BG = Background color
+// \033[y;xH - Change cursor position
+
+//How to log to CommandLine
+// call writeline("text"); - NEVER ADD \n, IT WILL BUG
+
 #include "aixen.h"
 
 int row = 0;
@@ -46,7 +54,7 @@ int doCommand(char* comm) // Here add commands if you want
     }
     else if(!strcasecmp(comm,"exit"))
     {
-        printf("\003[0;37;40");
+        printf("\033[0;37;40m");
         exit(0);
     }
     else if(!strcasecmp(comm,"main"))
