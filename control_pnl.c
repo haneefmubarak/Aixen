@@ -39,20 +39,29 @@ int doCommand(char* comm) // Here add commands if you want
     if(!strcasecmp(comm,"refresh"))
     {
     }
-    if(!strcasecmp(comm,"heartbeat"))
+    else if(!strcasecmp(comm,"heartbeat"))
     {
         config.status.heartbeat = config.status.heartbeat == 0 ? 1 : 0;
         writeline("Switched state of heartbeat.");
     }
-    if(!strcasecmp(comm,"main"))
+    else if(!strcasecmp(comm,"exit"))
+    {
+        printf("\003[0;37;40");
+        exit(0);
+    }
+    else if(!strcasecmp(comm,"main"))
     {
         config.status.main = config.status.main == 0 ? 1 : 0;
         writeline("Switched state of main.");
     }
-    if(!strcasecmp(comm,"peer"))
+    else if(!strcasecmp(comm,"peer"))
     {
         config.status.peer = config.status.peer == 0 ? 1 : 0;
         writeline("Switched state of peer.");
+    }
+    else
+    {
+    	writeline("command not found.");
     }
 }
 void writeline(char* line)
