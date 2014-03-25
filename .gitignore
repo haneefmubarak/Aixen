@@ -18,7 +18,8 @@
 *.app
 
 # Build Directory
-build/*
+aixen
+build/
 .deps/
 aclocal.m4
 autom4te.cache/
