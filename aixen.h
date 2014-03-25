@@ -31,7 +31,7 @@ struct aixen_configuration {
 extern	struct aixen_configuration		config;
 
 // heartbeat
-extern void	(*func_heartbeat)(void *nothing);	// pthreads
+extern void	*(*func_heartbeat)(void *nothing);	// pthreads
 
 // control panel
 void		redraw			(void);
