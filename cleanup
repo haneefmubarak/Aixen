@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # remove build files
-make clean
-wait
+rm -rvf \
+aixen \
+*.o
 
 # remove generated autotools files
 rm -rvf \
