@@ -1,3 +1,10 @@
+#!/bin/bash
+
+# remove build files
+make clean
+wait
+
+# remove generated autotools files
 rm -rvf \
 aclocal.m4 \
 compile \

@@ -1,2 +1,6 @@
+#!/bin/bash
+
+# bootstrap autotools
 autoreconf --install || exit 1
 ./configure
+wait
