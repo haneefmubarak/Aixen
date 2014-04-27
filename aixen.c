@@ -3,8 +3,8 @@
 struct aixen_configuration config;
 
 int main (int argc, char **argv) {
-	// a.out [master/slave-] [heartbeat port] [peer port] [client port] {upstream URL}
-	if ((argc != 5) && (argc !=6)) {
+	// a.out [master/slave-] {upstream URL}
+	if ((argc != 2) && (argc != 3)) {
 		return error_invocation (argc, argv);
 	}
 
@@ -17,31 +17,16 @@ int main (int argc, char **argv) {
 	else
 		return error_invocation (argc, argv);
 
-	config.port.heartbeat	= atoi (argv[2]);
-	config.port.peer	= atoi (argv[3]);
-	config.port.client	= atoi (argv[4]);
 
-	if (argc == 6)
+	if (argc == 3)
 		config.upstream = strdup (argv[5]);
 	else
 		config.upstream = NULL;
 
 
-	pthread_t thread_heartbeat;
-	assert (!pthread_create (		// pthreads returns zero on success
-			&thread_heartbeat,	// thread struct pointer
-			NULL,			// thread attr
-			func_heartbeat,		// function
-			NULL			// data pointer
-			));
-
-	config.status.heartbeat	= 1;
-	config.status.main	= 1;
-	config.status.peer	= 1;
-
-	if (config.master) {
+	if (config.master)
 		control();
-	}
+
 
 	return 0;
 }
@@ -51,25 +36,18 @@ int error_invocation (int argc, char **argv) {
 		"Invocation requires five or six arguments:\n"
 		"%s "
 		"[master/slave-] "
-		"[heartbeat port] "
-		"[peer port] "
-		"[client port] "
-		"{existing master/peer}"
+		"{existing master}"
 		"\n\n"
 		"Examples (localhost):\n"
 		"\t"
 		"First Master:\n"
 		"\t\t"
-		"%s master 4485 4480 4490\n"
-		"\t"
-		"Additional Master:\n"
-		"\t\t"
-		"%s master 4465 4460 4470 localhost:4480\n"
-		"\t"
+		"%s master\n"
+		"\n\t"
 		"Slave:\n"
 		"\t\t"
-		"%s slave- 8085 8080 8090 localhost:4490\n",
-		argv[0], argv[0], argv[0], argv[0]
+		"%s slave- localhost:4490\n",
+		argv[0], argv[0], argv[0]
 		);
 
 
