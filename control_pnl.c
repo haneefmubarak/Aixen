@@ -34,9 +34,6 @@ void control()
 
 void redraw(void)
 {
-    printf("\033[0;0H\033[0;37;44mHeartbeat:     Peer listen:     Main Server:     Connected: %d",config.connected);
-    printf("\033[0;12H\033[0;37;4%s%s%s",(config.status.heartbeat == 0 ? "1" : "2"),"m",(config.status.heartbeat == 0 ? "OFF" : "OK "));
-    printf("\033[0;29H\033[0;37;4%s%s%s",(config.status.peer == 0 ? "1" : "2"),"m",(config.status.peer == 0 ? "OFF" : "OK "));
     printf("\033[0;46H\033[0;37;4%s%s%s",(config.status.main == 0 ? "1" : "2"), "m",(config.status.main == 0 ? "OFF" : "OK "));
     printf("\033[37;0H\033[0;30;47maixen>\033[0;37;40m");
     printf("\033[2;0H");
@@ -47,11 +44,6 @@ int doCommand(char* comm) // Here add commands if you want
     if(!strcasecmp(comm,"refresh"))
     {
     }
-    else if(!strcasecmp(comm,"heartbeat"))
-    {
-        config.status.heartbeat = config.status.heartbeat == 0 ? 1 : 0;
-        writeline("Switched state of heartbeat.");
-    }
     else if(!strcasecmp(comm,"exit"))
     {
         printf("\033[0;37;40m");
@@ -61,11 +53,6 @@ int doCommand(char* comm) // Here add commands if you want
     {
         config.status.main = config.status.main == 0 ? 1 : 0;
         writeline("Switched state of main.");
-    }
-    else if(!strcasecmp(comm,"peer"))
-    {
-        config.status.peer = config.status.peer == 0 ? 1 : 0;
-        writeline("Switched state of peer.");
     }
     else
     {
