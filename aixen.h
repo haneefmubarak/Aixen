@@ -9,13 +9,11 @@
 #include <pthread.h>
 
 struct aixen_ports {
-	int heartbeat;
-	int peer;
+	int master;
 	int client;
 };
 
 struct aixen_status {
-	int heartbeat;
 	int main;
 	int peer;
 };
@@ -29,9 +27,6 @@ struct aixen_configuration {
 };
 
 extern	struct aixen_configuration		config;
-
-// heartbeat
-extern void	*(*func_heartbeat)(void *nothing);	// pthreads
 
 // control panel
 void		redraw			(void);

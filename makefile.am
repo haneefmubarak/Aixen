@@ -1,2 +1,2 @@
 bin_PROGRAMS=aixen
-aixen_SOURCES=aixen.c aixen.h heartbeat.c control_pnl.c
+aixen_SOURCES=aixen.c aixen.h control_pnl.c
