@@ -8,9 +8,25 @@
 
 #include <pthread.h>
 
-struct aixen_ports {
-	int master;
-	int client;
+struct hostport {
+	char *host;
+	int port;
+};
+
+struct list_hostports {
+	struct hostport *address;
+	int count;
+};
+
+struct aixen_ipports {
+	union {
+		struct list_hostports db;
+		struct list_hostports slave;
+	} master;
+	union {
+		struct list_hostports master;
+		struct list_hostports client;
+	} slave;
 };
 
 struct aixen_status {
@@ -19,7 +35,7 @@ struct aixen_status {
 };
 
 struct aixen_configuration {
-	struct aixen_ports	port;
+	struct aixen_ipports	ipport;
 	struct aixen_status	status;
 	int			master;
 	int			connected;
